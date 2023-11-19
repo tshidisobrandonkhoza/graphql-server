@@ -17,6 +17,16 @@ const resolvers = {
         authors() {
             return db.authors
         },
+        review(_, args) {
+            return db.reviews.find(res => res.id === args.id)
+        },
+        game(_, args) {
+            return db.games.find(res => res.id === args.id)
+        },
+        author(_, args) {
+            return db.authors.find(res => res.id === args.id)
+        }
+
     }
 }
 const server = new ApolloServer({
