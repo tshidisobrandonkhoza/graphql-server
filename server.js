@@ -56,13 +56,27 @@ const resolvers = {
         addGame(_, args) {
 
             let createdID = parseInt((db.games[db.games.length - 1]).id) + 1
-
             let game = {
                 ...args.game,
                 id: createdID
             }
             db.games.push(game)
             return game
+        },
+        updateGame(_, args) {
+            db.games = db.games.map(res => {
+                if (res.id === args.id) {
+
+                    res.title = args.updates.title;
+                    res.platform = args.updates.platform;
+                    return res
+                    // return {...res, ..arg.updates}
+                } else {
+                    return res
+                }
+
+            })
+            return db.games.find(res=> res.id === args.id)
         }
     }
 }
